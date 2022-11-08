@@ -46,3 +46,33 @@ class Cereal:
 
     def __str__(self) -> str:
         return self.name
+
+    @property
+    def get_mfr(self) -> str:
+        match(self.mfr.upper()):
+            case 'A':
+                return "American Home Food Products"
+            case 'G':
+                return "General Mills"
+            case 'K':
+                return "Kelloggs"
+            case 'N':
+                return "Nabisco"
+            case 'P':
+                return "Post"
+            case 'Q':
+                return "Quaker Oats"
+            case 'R':
+                return "Ralston Purina"
+            case _:
+                return "Probably Nestlé"
+
+    @property
+    def get_type(self) -> str:
+        match(self.type.upper()):
+            case 'C':
+                return "Cold"
+            case 'H':
+                return "Hot"
+            case _:
+                return "Soggy"
