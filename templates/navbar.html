@@ -27,8 +27,10 @@
     </select>
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
-
-  <!-- <form action="/login" method="POST">
+  <p>
+    {% if not session['login'] %}
+  </p>
+  <form action="/login" method="POST">
     <li>
       <input name="username" type="text" placeholder=".Username" aria-label="username" required>
     </li>
@@ -39,9 +41,21 @@
     <li>
       <button type="submit">Login</button>
     </li>
+  </form>
+    {% else %}
+    <form action="/logout">
+      <li>
+        <button type="submit">Logout</button>
+      </li>
+    </form>
 
-  </form> -->
+    <form action="/update">
+      <li>
+        <button type="submit">Update Cereal</button>
+      </li>
+    </form>
 
+    {% endif %}
   <li>
   </li>
 </ul>

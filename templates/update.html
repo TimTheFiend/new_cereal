@@ -1,14 +1,14 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Cereal!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 
 </head>
 <body>
 
-
-</body>
+{% include 'navbar.html' %}
 <form action="/update" method="POST">
     <label for="id">ID:</label><br>
     <input type="number" id="id" name="id" value="" min=0><br>
@@ -57,5 +57,5 @@
     <input type="number" id="rating" name="rating" value="" step=0.01><br>
     <input type="submit" value="Submit">
   </form>
-
-</html> -->
+</body>
+</html>

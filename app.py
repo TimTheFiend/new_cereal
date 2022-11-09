@@ -1,15 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 
 from data.cereal_db import DbTool
 from parsers.query_parser import parse_query
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 
 db = DbTool()
-current_user = None
 
 @app.route('/', methods=["GET"])
 def home():
+    if session.get('login'):
+        print(session['login'] == True)
     if 'search' in request.args:
         return render_template(
             "home.html",
@@ -35,5 +38,24 @@ def get_cereal_id(id):
 def login():
     if request.method == 'POST':
         if db.attempt_login(request.form['username'], request.form['password']):
-            return "Logged in"
+            session['login'] = True
+            return redirect(url_for('home'))
         return "tucked in"
+
+@app.route('/logout')
+def logout():
+    if session['login'] == True:
+        session['login'] = False
+    return redirect(url_for('home'))
+
+
+@app.route("/update", methods=["GET", "POST"])
+def update():
+    if not session.get('login') or session['login'] == False:
+        return redirect(url_for('home'))
+    # if session['login'] == False:
+    #     return redirect('home')
+    if request.method == "GET":
+        return render_template('update.html')
+    elif request.method == "POST":
+        return "nah son"
