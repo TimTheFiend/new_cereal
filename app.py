@@ -58,4 +58,6 @@ def update():
     if request.method == "GET":
         return render_template('update.html')
     elif request.method == "POST":
-        return "nah son"
+        if db.on_update(request.form):
+            return redirect(url_for('home'))
+        return "Something went wrong."

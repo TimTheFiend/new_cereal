@@ -47,6 +47,16 @@ class DbTool:
         except:
             return None
 
+    def on_update(self, request: dict):
+        if (cereal_id := request['id']) == "":
+            self.add_cereal(Cereal(request))
+            return True
+        elif (existing_cereal := self.get_cereal(int(cereal_id))) != None:
+            self.update_cereal(cereal_id, Cereal(request))
+            return True
+        return False
+
+
     """UPDATE"""
     def update_cereal(self, id_to_update: int, new_cereal: Cereal) -> bool:
         if (old_cereal := self.get_cereal(id=id_to_update)) is None:
@@ -58,7 +68,9 @@ class DbTool:
             conn.row_factory = sql.Row
             c = conn.cursor()
             c.execute(self.UPDATE_WHERE_CEREAL, new_cereal.get_values_for_update)
+            conn.commit()
             return True
+
 
     def add_cereal(self, cereal: Cereal) -> int:
         try:
