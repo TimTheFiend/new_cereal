@@ -163,3 +163,5 @@ cython_debug/
 # Custom
 static/img/
 .vscode/
+data/cereal.db
+data/cereal.db

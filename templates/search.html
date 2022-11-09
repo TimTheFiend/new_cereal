@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cereal!</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <form class="search" action="/search" method="POST">
+      <label for="calories">Calories</label>
+      <select name="calories_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="calories" name="calories" value="" /><br />
+
+      <label for="protein">protein</label>
+      <select name="protein_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="protein" name="protein" value="" /><br />
+
+      <label for="fat">fat</label>
+      <select name="fat_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="fat" name="fat" value="" /><br />
+
+      <label for="sodium">sodium</label>
+      <select name="sodium_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="sodium" name="sodium" value="" /><br />
+
+      <label for="fiber">fiber</label>
+      <select name="fiber_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="fiber" name="fiber" value="" step="0.01" /><br />
+
+      <label for="carbo">carbo</label>
+      <select name="carbo_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="carbo" name="carbo" value="" step="0.01" /><br />
+
+      <label for="sugars">sugars</label>
+      <select name="sugars_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="sugars" name="sugars" value="" /><br />
+
+      <label for="potass">potass</label>
+      <select name="potass_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="potass" name="potass" value="" /><br />
+
+      <label for="vitamins">vitamins</label>
+      <select name="vitamins_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="vitamins" name="vitamins" value="" /><br />
+
+      <label for="shelf">shelf</label>
+      <select name="shelf_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="shelf" name="shelf" value="" /><br />
+
+      <label for="weight">weight</label>
+      <select name="weight_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input
+        type="number"
+        id="weight"
+        name="weight"
+        value=""
+        step="0.01"
+      /><br />
+
+      <label for="cups">cups</label>
+      <select name="cups_operator">
+        <option value=">=">>=</option>
+        <option value=">">></option>
+        <option value="<="><=</option>
+        <option value="<"><</option>
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+      </select>
+      <input type="number" id="cups" name="cups" value="" step="0.01" /><br>
+
+      <input type="submit" value="Search" style="width: inherit; height: 100px;" />
+    </form>
+  </body>
+</html>

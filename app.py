@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 
 from data.cereal_db import DbTool
-from parsers.query_parser import parse_query
+from parsers.query_parser import parse_query, parse_advanced_query
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -71,3 +71,21 @@ def delete():
     elif request.method == 'POST':
         db.delete_cereal(request.form['id'])
         return redirect(url_for('home'))
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        queries = parse_advanced_query(request.form)
+        cereal_box = db.get_query_cereals(queries)
+        if cereal_box is None:
+            return render_template(
+            'home.html'
+        )
+        return render_template(
+            'home.html',
+            cereals=db.get_query_cereals(queries)
+        )
+    elif request.method == 'GET':
+        return render_template(
+            'search.html'
+        )

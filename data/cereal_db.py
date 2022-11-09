@@ -47,6 +47,8 @@ class DbTool:
         except:
             return None
 
+
+
     def on_update(self, request: dict):
         if (cereal_id := request['id']) == "":
             self.add_cereal(Cereal(request))
