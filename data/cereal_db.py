@@ -51,7 +51,7 @@ class DbTool:
         if (cereal_id := request['id']) == "":
             self.add_cereal(Cereal(request))
             return True
-        elif (existing_cereal := self.get_cereal(int(cereal_id))) != None:
+        elif self.get_cereal(int(cereal_id)) != None:
             self.update_cereal(cereal_id, Cereal(request))
             return True
         return False

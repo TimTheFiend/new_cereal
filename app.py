@@ -61,3 +61,13 @@ def update():
         if db.on_update(request.form):
             return redirect(url_for('home'))
         return "Something went wrong."
+
+@app.route('/delete', methods=['GET','POST'])
+def delete():
+    if not session.get('login') or session['login'] == False:
+        return redirect(url_for('home'))
+    if request.method == "GET":
+        return render_template('delete.html')
+    elif request.method == 'POST':
+        db.delete_cereal(request.form['id'])
+        return redirect(url_for('home'))
