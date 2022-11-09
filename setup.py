@@ -48,10 +48,17 @@ if __name__ == "__main__":
     """TEST UPDATE"""
     single_cereal.id = UPDATED_ID
     assert db.update_cereal(UPDATED_ID, single_cereal) is True
-    ## Extra test
+    # Extra test
     updated_cereal = db.get_cereal(2)
     assert single_cereal.name == updated_cereal.name
     """POST ADD"""
     assert db.add_cereal(cereal=Cereal(CEREAL_DICT)) == True
     all_cereal = db.get_cereals()
-    print()
+    """DELETE"""
+    db.delete_cereal(10)
+    deleted_cereal = db.get_cereal(10)
+    assert deleted_cereal is None
+
+    assert db.attempt_login("username", "root") == True
+
+    assert db.attempt_login("lmao", "ayy") == False
