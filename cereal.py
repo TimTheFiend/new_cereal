@@ -44,6 +44,10 @@ class Cereal:
                 self.rating,
             )
 
+    @property
+    def get_values_for_update(self):
+        return self.get_values + (self.id,)
+
     def __str__(self) -> str:
         return self.name
 

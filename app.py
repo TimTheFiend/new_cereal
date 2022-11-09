@@ -10,6 +10,7 @@ db = DbTool()
 @app.route('/')
 def home():
     if 'search' in request.args:
+        foo = request.args['search']
         return render_template(
             "home.html",
             cereals=[db.get_cereal(int(request.args['search']))]
