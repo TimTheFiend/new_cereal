@@ -12,8 +12,8 @@ class DbTool:
             self.reset_database()
 
 
-    """GET ALL"""
     def get_cereals(self) -> list[Cereal]:
+        """Gets and returns all rows within the `Cereal`-table, as `Cereal`-objects."""
         with sql.connect(self.conn) as conn:
             conn.row_factory = sql.Row
             c = conn.cursor()
@@ -22,8 +22,8 @@ class DbTool:
             return [Cereal(dict(x)) for x in c.fetchall()]
 
 
-    """GET ONE"""
     def get_cereal(self, id: int) -> Cereal:
+        """Gets and returns a single row within the `Cereal`-table (based on ID), as a `Cereal`-object."""
         try:
             with sql.connect(self.conn) as conn:
                 conn.row_factory = sql.Row
@@ -33,8 +33,9 @@ class DbTool:
         except:
             return None
 
-    """GET SELECTED"""
+
     def get_query_cereals(self, query : str, orderby: str = "") -> list[Cereal]:
+        """Gets and returns select rows within the `Cereal`-table, based on user-specified search(es)."""
         try:
             with sql.connect(self.conn) as conn:
                 conn.row_factory = sql.Row
@@ -48,8 +49,8 @@ class DbTool:
             return None
 
 
-
-    def on_update(self, request: dict):
+    def on_update(self, request: dict) -> bool:
+        """Handles POST-method from `update.html`, and calls the appropriate function based on user-input."""
         if (cereal_id := request['id']) == "":
             self.add_cereal(Cereal(request))
             return True
@@ -59,8 +60,8 @@ class DbTool:
         return False
 
 
-    """UPDATE"""
     def update_cereal(self, id_to_update: int, new_cereal: Cereal) -> bool:
+        """Attempts to update row in `Cereal`-table. Returns `True` if update is successful."""
         if (old_cereal := self.get_cereal(id=id_to_update)) is None:
             return False
 
@@ -75,6 +76,7 @@ class DbTool:
 
 
     def add_cereal(self, cereal: Cereal) -> int:
+        """Adds `Cereal`-object to `Cereal`-table. Returns True on success; False on raised exception."""
         try:
             with sql.connect(self.conn) as conn:
                 conn.row_factory = sql.Row
@@ -85,7 +87,9 @@ class DbTool:
         except:
             return False
 
+
     def delete_cereal(self, id: int) -> bool:
+        """Attempts to delete a row in `Cereal`-table, returns True on success; False on raised exception."""
         try:
             with sql.connect(self.conn) as conn:
                 c = conn.cursor()
@@ -97,6 +101,7 @@ class DbTool:
 
 
     def reset_database(self):
+        """Resets database-tables. Mainly used for testing."""
         from parsers import csv_parser
         cereal_box = csv_parser.read_cereal()
 
@@ -109,11 +114,15 @@ class DbTool:
             c.executescript(self.CREATE_TABLE_USER)
             c.execute(self.INSERT_INTO_USER)
 
+
     def attempt_login(self, username: str, password: str) -> bool:
+        """Attempts to log in the user, where `username` is case-insensitive.
+        Considering the scope of the project, only a `bool` is returned to indicate whether the login is successful or not.
+        """
         try:
             with sql.connect(self.conn) as conn:
                 c = conn.cursor()
-                c.execute(f"SELECT * FROM User WHERE Username = \"{username}\" AND Password = \"{password}\"")
+                c.execute(f"SELECT * FROM User WHERE Username = \"{username}\" COLLATE NOCASE AND Password = \"{password}\"")
                 user = c.fetchone()
                 if user is not None:
                     return True
@@ -121,8 +130,10 @@ class DbTool:
         except:
             return False
 
+
     @property
     def CREATE_TABLE_USER(self) -> str:
+        """Returns the SQL query to create ``-table."""
         return """
             DROP TABLE IF EXISTS User;
             CREATE TABLE User(
@@ -132,8 +143,10 @@ class DbTool:
             );
             """
 
+
     @property
     def INSERT_INTO_USER(self) -> str:
+        """Returns the SQL query to insert values into the `User`-table."""
         return """
             INSERT INTO User(Username, Password)
             VALUES (
@@ -142,8 +155,10 @@ class DbTool:
             )
         """
 
+
     @property
     def CREATE_CEREAL_TABLE(self) -> str:
+        """Returns the SQL query to create `Cereal`-table."""
         return """
             DROP TABLE IF EXISTS Cereal;
             CREATE TABLE Cereal(
@@ -171,6 +186,7 @@ class DbTool:
 
     @property
     def INSERT_INTO_CEREAL(self) -> str:
+        """Returns the SQL query to insert values into the `Cereal`-table."""
         return """
             INSERT INTO Cereal(
                 Name,
@@ -210,8 +226,10 @@ class DbTool:
             )
             """
 
+
     @property
     def UPDATE_WHERE_CEREAL(self) -> str:
+        """Returns the SQL query to update element(s) in `Cereal`-table."""
         return """
             UPDATE Cereal SET
                 Name = ?,

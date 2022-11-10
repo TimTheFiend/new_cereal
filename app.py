@@ -6,8 +6,8 @@ from parsers.query_parser import parse_query, parse_advanced_query
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-
 db = DbTool()
+
 
 @app.route('/', methods=["GET"])
 def home():
@@ -27,12 +27,14 @@ def home():
         cereals=db.get_cereals()
     )
 
+
 @app.route('/<int:id>')
 def get_cereal_id(id):
     return render_template(
         "home.html",
         cereals=[db.get_cereal(id)]
     )
+
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -41,6 +43,7 @@ def login():
             session['login'] = True
             return redirect(url_for('home'))
         return "tucked in"
+
 
 @app.route('/logout')
 def logout():
@@ -53,14 +56,13 @@ def logout():
 def update():
     if not session.get('login') or session['login'] == False:
         return redirect(url_for('home'))
-    # if session['login'] == False:
-    #     return redirect('home')
     if request.method == "GET":
         return render_template('update.html')
     elif request.method == "POST":
         if db.on_update(request.form):
             return redirect(url_for('home'))
         return "Something went wrong."
+
 
 @app.route('/delete', methods=['GET','POST'])
 def delete():
@@ -71,6 +73,7 @@ def delete():
     elif request.method == 'POST':
         db.delete_cereal(request.form['id'])
         return redirect(url_for('home'))
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

@@ -19,12 +19,15 @@ class Cereal:
         self.rating = None
 
         if values is not None:
+            # If `Cereal` contains a field with the name of `k`, set the value of said field.
             for k, v in values.items():
                 if hasattr(self, k.lower()):
                     setattr(self, k.lower(), v)
 
     @property
     def get_values(self):
+        """Gets the fields needed to insert into database.
+        """
         return (
                 self.name,
                 self.mfr,
@@ -44,15 +47,22 @@ class Cereal:
                 self.rating,
             )
 
+
     @property
     def get_values_for_update(self):
+        """Gets the fields needed to update in database.
+        """
         return self.get_values + (self.id,)
+
 
     def __str__(self) -> str:
         return self.name
 
+
     @property
     def get_mfr(self) -> str:
+        """Returns the 'proper' value of Manufacturer `Char` value.
+        """
         match(self.mfr.upper()):
             case 'A':
                 return "American Home Food Products"
@@ -73,6 +83,8 @@ class Cereal:
 
     @property
     def get_type(self) -> str:
+        """Returns the 'proper' value of Type `Char` value.
+        """
         match(self.type.upper()):
             case 'C':
                 return "Cold"
