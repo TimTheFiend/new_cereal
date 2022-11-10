@@ -52,9 +52,7 @@
         {% endif %}
     </table>
 
-    {% if cereal.get_img != "" %}
-    <img src="{{ cereal.get_img }}" width="100px" height="100px" />
-    {% endif %}
+
 
 
     <form action="/{{ cereal.id }}" method="POST" enctype="multipart/form-data">
@@ -63,6 +61,26 @@
     </form>
 
     </body>
+    {% if cereal.id != 1 %}
+    <button>
+        <a href="{{ url_for('get_cereal_id', id=cereal.id - 1) }}">
+            Previous Cereal
+        </a>
+    </button>
+    {% endif %}
 
+    {% if cereal.id != max_id %}
+    <button>
+        <a href="{{ url_for('get_cereal_id', id=cereal.id + 1) }}">
+            Next Cereal
+        </a>
+    </button>
+
+    {% endif %}
+    <br>
+    <br>
+    {% if cereal.get_img != "" %}
+    <img src="{{ cereal.get_img }}" />
+    {% endif %}
 
     </html>

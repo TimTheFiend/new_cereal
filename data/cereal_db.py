@@ -132,6 +132,11 @@ class DbTool:
 
 
     @property
+    def get_max_rows(self) -> int:
+        return len(self.get_cereals())
+
+
+    @property
     def CREATE_TABLE_USER(self) -> str:
         """Returns the SQL query to create ``-table."""
         return """

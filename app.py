@@ -38,7 +38,8 @@ def get_cereal_id(id):
     if request.method == 'GET':
         return render_template(
             "index.html",
-            cereal=db.get_cereal(id)
+            cereal=db.get_cereal(id),
+            max_id=db.get_max_rows
         )
     if request.method == 'POST':
         if 'img' not in request.files:
@@ -48,7 +49,8 @@ def get_cereal_id(id):
         file.save(join(IMAGE_DIR, f"{id}.png"))
         return render_template(
             "index.html",
-            cereal=db.get_cereal(id)
+            cereal=db.get_cereal(id),
+            max_id=db.get_max_rows
         )
 
 

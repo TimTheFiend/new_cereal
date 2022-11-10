@@ -102,3 +102,8 @@ form {
   input+input {
     float: right;
   }
+
+img {
+  max-width: 600px;
+  max-height: 600px;
+}
