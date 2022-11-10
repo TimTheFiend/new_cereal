@@ -250,3 +250,5 @@ class DbTool:
                 Rating = ?
             WHERE Id = ?;
             """
+
+

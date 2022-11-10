@@ -1,3 +1,5 @@
+from constants import IMAGE_DIR
+
 class Cereal:
     def __init__(self, values: dict = None) -> None:
         self.id = None
@@ -92,3 +94,11 @@ class Cereal:
                 return "Hot"
             case _:
                 return "Soggy"
+
+    @property
+    def get_img(self) -> str:
+        from os import listdir
+        for x in listdir(IMAGE_DIR):
+            if x.startswith(str(self.id)):
+                return f"{IMAGE_DIR}\\{x}"
+        return ""

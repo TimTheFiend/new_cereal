@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cereal!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    </head>
+    <body>
+    {% include 'navbar.html' %}
+    <table>
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>MFR</th>
+            <th>Type</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Fat</th>
+            <th>Sodium</th>
+            <th>Fiber</th>
+            <th>Carbo</th>
+            <th>Sugars</th>
+            <th>Pot.Ass</th>
+            <th>Vitamins</th>
+            <th>Shelf</th>
+            <th>Weight</th>
+            <th>Cups</th>
+            <th>Rating</th>
+        </tr>
+        {% if cereal is defined %}
+            <tr>
+                <td>{{ cereal.id }}</td>
+                <td>{{ cereal.name }}</td>
+                <td>{{ cereal.get_mfr }}</td>
+                <td>{{ cereal.get_type }}</td>
+                <td>{{ cereal.calories }}</td>
+                <td>{{ cereal.protein }}</td>
+                <td>{{ cereal.fat }}</td>
+                <td>{{ cereal.sodium }}</td>
+                <td>{{ cereal.fiber }}</td>
+                <td>{{ cereal.carbo }}</td>
+                <td>{{ cereal.sugars }}</td>
+                <td>{{ cereal.potass }}</td>
+                <td>{{ cereal.vitamins }}</td>
+                <td>{{ cereal.shelf }}</td>
+                <td>{{ cereal.weight }}</td>
+                <td>{{ cereal.cups }}</td>
+                <td>{{ cereal.rating }}</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    {% if cereal.get_img != "" %}
+    <img src="{{ cereal.get_img }}" width="100px" height="100px" />
+    {% endif %}
+
+
+    <form action="/{{ cereal.id }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="img" id="img">
+        <input type="submit" value="Submit">
+    </form>
+
+    </body>
+
+
+    </html>

@@ -1,12 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+
 
 from data.cereal_db import DbTool
 from parsers.query_parser import parse_query, parse_advanced_query
+from constants import IMAGE_DIR, ALLOWED_IMG_EXTENSIONS
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 db = DbTool()
+
 
 
 @app.route('/', methods=["GET"])
@@ -28,12 +32,24 @@ def home():
     )
 
 
-@app.route('/<int:id>')
+@app.route('/<int:id>', methods=['GET', 'POST'])
 def get_cereal_id(id):
-    return render_template(
-        "home.html",
-        cereals=[db.get_cereal(id)]
-    )
+    from os.path import join
+    if request.method == 'GET':
+        return render_template(
+            "index.html",
+            cereal=db.get_cereal(id)
+        )
+    if request.method == 'POST':
+        if 'img' not in request.files:
+            flash("no files")
+            return redirect(request.url)
+        file = request.files['img']
+        file.save(join(IMAGE_DIR, f"{id}.png"))
+        return render_template(
+            "index.html",
+            cereal=db.get_cereal(id)
+        )
 
 
 @app.route('/login', methods=['GET','POST'])
