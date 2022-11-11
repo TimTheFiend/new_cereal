@@ -44,11 +44,11 @@ def get_cereal_id(id):
             flash("no files")
             return redirect(request.url)
         file = request.files['img']
-        if not splitext(file.filename)[1][1:] in ALLOWED_IMG_EXTENSIONS:
+        if not (file_ext := splitext(file.filename)[1][1:]) in ALLOWED_IMG_EXTENSIONS:
             flash("invalid file extension")
             print("INVALID FILE EXTENSION")
             return redirect(request.url)
-        file.save(join(IMAGE_DIR, f"{id}.png"))
+        file.save(join(IMAGE_DIR, f"{id}.{file_ext}"))
         print()
         return render_template(
             "index.html",
@@ -100,14 +100,16 @@ def delete():
 def search():
     if request.method == 'POST':
         queries = parse_advanced_query(request.form)
-        cereal_box = db.get_query_cereals(queries)
+        order_by = request.form['orderby']
+        cereal_box = db.get_query_cereals(queries, orderby=request.form['orderby'])
         if cereal_box is None:
             return render_template(
             'home.html'
         )
+
         return render_template(
             'home.html',
-            cereals=db.get_query_cereals(queries)
+            cereals=cereal_box
         )
     elif request.method == 'GET':
         return render_template(

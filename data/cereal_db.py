@@ -44,7 +44,10 @@ class DbTool:
                 if orderby != "":
                     _sql += f" ORDER BY {orderby}"
                 c.execute(_sql)
-                return [Cereal(dict(x)) for x in c.fetchall()]
+                cereal_box = [Cereal(dict(x)) for x in c.fetchall()]
+                print()
+                return cereal_box
+                # return [Cereal(dict(x)) for x in c.fetchall()]
         except:
             return None
 

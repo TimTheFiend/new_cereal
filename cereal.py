@@ -102,3 +102,6 @@ class Cereal:
             if x.startswith(str(self.id)):
                 return f"{IMAGE_DIR}\\{x}"
         return ""
+
+
+        #TODO DELETE IMAGE WHEN UPLOADING NEW IMAGE
