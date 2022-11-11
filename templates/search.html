@@ -142,16 +142,51 @@
         step="0.01"
       /><br />
 
-      <label for="cups">cups</label>
-      <select name="cups_operator">
-        <option value=">=">>=</option>
-        <option value=">">></option>
-        <option value="<="><=</option>
-        <option value="<"><</option>
-        <option value="=">=</option>
-        <option value="!=">!=</option>
+
+
+      <label for="mfr">Manufacturer</label>
+      <select name="mfr">
+        <option value="" disabled selected>Select your option</option>
+        <option value="a">American Home Food Products</option>
+        <option value="g">General Mills</option>
+        <option value="k">Kelloggs</option>
+        <option value="n">Nabisco</option>
+        <option value="p">Post</option>
+        <option value="q">Quaker Oats</option>
+        <option value="r">Ralston Purina</option>
       </select>
-      <input type="number" id="cups" name="cups" value="" step="0.01" /><br>
+      <br>
+      <label for="type">Type</label>
+      <select name="type">
+        <option value="" disabled selected>Select your option</option>
+        <option value="c">Cold</option>
+        <option value="g">Hot(?)</option>
+      </select>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <label for="orderby">Order by:</label>
+      <select name="orderby">
+        <option value="id">Id</option>
+        <option value="name">Name</option>
+        <option value="mfr">MFR</option>
+        <option value="type">Type</option>
+        <option value="calories">Calories</option>
+        <option value="protein">Protein</option>
+        <option value="fat">Fat</option>
+        <option value="fiber">Fiber</option>
+        <option value="carbo">Carbo</option>
+        <option value="sugars">Sugars</option>
+        <option value="potass">Potass</option>
+        <option value="vitamins">Vitamins</option>
+        <option value="shelf">Shelf</option>
+        <option value="weight">Weight</option>
+        <option value="cups">Cups</option>
+        <option value="rating">Rating</option>
+      </select>
+      <br>
 
       <input type="submit" value="Search" style="width: inherit; height: 100px;" />
     </form>

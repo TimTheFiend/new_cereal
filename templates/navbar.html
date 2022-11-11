@@ -4,28 +4,7 @@
   </li>
 
   <form action="/" method="GET">
-    <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    <label for="orderby">Order by:</label>
-    <select name="category">
-      <option value="id">id</option>
-      <option value="name">name</option>
-      <option value="mfr">mfr</option>
-      <option value="type">type</option>
-      <option value="calories">calories</option>
-      <option value="protein">protein</option>
-      <option value="fat">fat</option>
-      <option value="sodium">sodium</option>
-      <option value="fiber">fiber</option>
-      <option value="carbo">carbo</option>
-      <option value="sugars">sugars</option>
-      <option value="potass">potass</option>
-      <option value="vitamins">vitamins</option>
-      <option value="shelf">shelf</option>
-      <option value="weight">weight</option>
-      <option value="cups">cups</option>
-      <option value="rating">rating</option>
-    </select>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
     <button>
       <a href="{{ url_for('search') }}">
         Advanced search
@@ -37,7 +16,7 @@
   </p>
   <form action="/login" method="POST">
     <li>
-      <input name="username" type="text" placeholder=".Username" aria-label="username" required>
+      <input name="username" type="text" placeholder="Username" aria-label="username" required>
     </li>
     <li>
       <input name="password" type="password" placeholder="Password" aria-label="password" required>

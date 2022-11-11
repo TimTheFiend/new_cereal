@@ -15,8 +15,6 @@ db = DbTool()
 
 @app.route('/', methods=["GET"])
 def home():
-    if session.get('login'):
-        print(session['login'] == True)
     if 'search' in request.args:
         return render_template(
             "home.html",
@@ -34,7 +32,7 @@ def home():
 
 @app.route('/<int:id>', methods=['GET', 'POST'])
 def get_cereal_id(id):
-    from os.path import join
+    from os.path import join, splitext
     if request.method == 'GET':
         return render_template(
             "index.html",
@@ -46,7 +44,12 @@ def get_cereal_id(id):
             flash("no files")
             return redirect(request.url)
         file = request.files['img']
+        if not splitext(file.filename)[1][1:] in ALLOWED_IMG_EXTENSIONS:
+            flash("invalid file extension")
+            print("INVALID FILE EXTENSION")
+            return redirect(request.url)
         file.save(join(IMAGE_DIR, f"{id}.png"))
+        print()
         return render_template(
             "index.html",
             cereal=db.get_cereal(id),

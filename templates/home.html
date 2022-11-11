@@ -32,7 +32,8 @@
         {% if cereals is defined %}
             {% for cereal in cereals %}
             <tr>
-                <td>{{ cereal.id }}</td>
+                <!-- {{ url_for('get_cereal_id', id=cereal.id - 1) }} -->
+                <td><a href="{{ url_for('get_cereal_id', id=cereal.id) }}">{{ cereal.id }}</a></td>
                 <td>{{ cereal.name }}</td>
                 <td>{{ cereal.get_mfr }}</td>
                 <td>{{ cereal.get_type }}</td>

@@ -7,6 +7,9 @@ def parse_advanced_query(query: dict[str, str]):
     operator = ""
     conditionals = []
 
+    if query.get('mfr') or query.get('type'):
+        print()
+
     for index, values in enumerate(query.items()):
         """The order of the dictionary goes:
         0: x_operator
@@ -21,7 +24,10 @@ def parse_advanced_query(query: dict[str, str]):
             operator = value
         else:
             if value != "":
-                conditionals.append(f"{key}{operator}{value}")
+                if key not in ['mfr', 'type']:
+                    conditionals.append(f"{key}{operator}{value}")
+                    continue
+                conditionals.append(f'{key}="{value.upper()}"')
                 continue
             operator = ""
     return " AND ".join(x for x in conditionals)
