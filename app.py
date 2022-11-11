@@ -100,7 +100,6 @@ def delete():
 def search():
     if request.method == 'POST':
         queries = parse_advanced_query(request.form)
-        order_by = request.form['orderby']
         cereal_box = db.get_query_cereals(queries, orderby=request.form['orderby'])
         if cereal_box is None:
             return render_template(
